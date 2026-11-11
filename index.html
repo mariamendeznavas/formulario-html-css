@@ -2,44 +2,47 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Ejercicio3.css">
     <title>Formulario de Reserva de Hotel</title>
 </head>
 <body>
 
     <div class="contenedor">
-        
+
         <header class="cabecera"><!--clase para darle estilo en css a la cabecera -->
             <h1>Petición de Reserva de Hotel</h1>
-            <p>Rellene todos los campos para solicitar su reserva.</p>
+            <p>Rellene los campos obligatorios para solicitar su reserva.</p>
+            <p>Formulario de práctica: no envía ni guarda ningún dato.</p>
         </header>
 
-        <!-- Declaración del formulario FORM -->
-        <form action="/procesar-reserva" method="POST"> <!--El atributo action dice dónde se enviarán los datos del formulario -->
-            
+        <!-- Declaración del formulario FORM.
+             Es una página estática (GitHub Pages), no hay servidor que procese los datos,
+             por eso action="#" y method="get": al enviar no da error de página. -->
+        <form action="#" method="get">
+
             <!--FIELDSET: Datos de Contacto -->
             <fieldset>
                 <legend>Datos de Contacto</legend>
-                
+
                 <!--Nombre-->
-                <div class="apartado"><!--Se aplica div form-group a cada label/input para poder tratarlos mejor (modularidad)-->
+                <div class="apartado"><!--Se aplica div a cada label/input para poder tratarlos mejor (modularidad)-->
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
                 </div>
-                
+
                 <!--Apellidos-->
                 <div class="apartado">
                     <label for="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" name="apellidos" required>
                 </div>
-                
 
                 <!--Teléfono-->
                 <div class="apartado">
                     <label for="telefono">Teléfono de contacto:</label>
                     <input type="tel" id="telefono" name="telefono" required>
                 </div>
-                
+
                 <!--email-->
                 <div class="apartado">
                     <label for="email">E-mail:</label>
@@ -50,7 +53,7 @@
             <!--FIELDSET: Detalles de la Reserva -->
             <fieldset>
                 <legend>Detalles de la Reserva</legend>
-                
+
                 <!--Número de Noches -->
                 <div class="apartado">
                     <label for="noches">Número de noches:</label>
@@ -59,14 +62,15 @@
 
                 <!--Fecha de Entrada (Día/Mes) -->
                 <div class="apartado">
-                    <label>Fecha de entrada:</label>
+                    <label for="dia">Fecha de entrada:</label>
                     <div class="seleccion">
                         <!-- MENÚ DESPLEGABLE: DÍA -->
-                        <select id="dia" name="dia" style="width: 48%; margin-right: 4%;">
+                        <select id="dia" name="dia" style="width: 48%; margin-right: 4%;" required>
                             <option value="">-- Día --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
+                            <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
@@ -79,7 +83,8 @@
                             <option value="14">14</option>
                             <option value="15">15</option>
                             <option value="16">16</option>
-                            <option value="17">18</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
                             <option value="19">19</option>
                             <option value="20">20</option>
                             <option value="21">21</option>
@@ -94,9 +99,9 @@
                             <option value="30">30</option>
                             <option value="31">31</option>
                         </select>
-                        
+
                         <!-- MENÚ DESPLEGABLE: MES -->
-                        <select id="mes" name="mes" style="width: 48%;">
+                        <select id="mes" name="mes" style="width: 48%;" required aria-label="Mes de entrada">
                             <option value="">-- Mes --</option>
                             <option value="1">Enero</option>
                             <option value="2">Febrero</option>
@@ -113,20 +118,20 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <!-- BOTÓN DE RADIO: Tipo de Habitación -->
                 <div class="apartado">
                     <label>Tipo de Habitación:</label>
                     <div class="apartadoalineado">
                         <!-- Todos tienen el mismo atributo name para que solo uno pueda ser seleccionado -->
-                        <input type="radio" name="habitacion" value="simple" required> 
-                        <label>Simple</label>
-                        
-                        <input type="radio" name="habitacion" value="doble">
-                        <label>Doble</label>
-                             
-                        <input type="radio" name="habitacion" value="matrimonio">
-                        <label>Matrimonio</label> 
+                        <input type="radio" id="hab-simple" name="habitacion" value="simple" required>
+                        <label for="hab-simple">Simple</label>
+
+                        <input type="radio" id="hab-doble" name="habitacion" value="doble">
+                        <label for="hab-doble">Doble</label>
+
+                        <input type="radio" id="hab-matrimonio" name="habitacion" value="matrimonio">
+                        <label for="hab-matrimonio">Matrimonio</label>
                     </div>
                 </div>
 
@@ -134,18 +139,18 @@
                 <div class="apartado">
                     <label>Servicios Adicionales:</label>
                     <div class="apartadoalineado">
-                        <!-- Cada checkbox debe tener un 'name' diferente para multiseleccion -->
-                        <input type="checkbox" name="desayuno" value="si">
-                        <label>Desayuno</label>
-                             
-                        <input type="checkbox" name="comida" value="si">
-                        <label>Comida</label>
-                             
-                        <input type="checkbox" name="cena" value="si">
-                        <label>Cena</label>
-                             
-                        <input type="checkbox" name="supletoria" value="si">
-                        <label>Cama Supletoria</label>   
+                        <!-- Cada checkbox debe tener un 'name' diferente para multiselección -->
+                        <input type="checkbox" id="desayuno" name="desayuno" value="si">
+                        <label for="desayuno">Desayuno</label>
+
+                        <input type="checkbox" id="comida" name="comida" value="si">
+                        <label for="comida">Comida</label>
+
+                        <input type="checkbox" id="cena" name="cena" value="si">
+                        <label for="cena">Cena</label>
+
+                        <input type="checkbox" id="supletoria" name="supletoria" value="si">
+                        <label for="supletoria">Cama Supletoria</label>
                     </div>
                 </div>
 
@@ -157,7 +162,7 @@
                 </div>
             </fieldset>
 
-            <!-- 3. Botones de Envío y Limpieza -->
+            <!-- Botones de Envío y Limpieza -->
             <div class="grupoboton">
                 <!-- Botón para LIMPIAR el formulario, restablece todos los valores -->
                 <button type="reset">Limpiar Formulario</button>
@@ -168,11 +173,4 @@
         </form><!--final del formulario-->
     </div><!--Final del div grande contenedor-->
 </body>
-
-
-
-
-
-
-
 </html>
